@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-class Readfile {
+public final class Readfile {
 	
 	private Readfile() {
 	}
