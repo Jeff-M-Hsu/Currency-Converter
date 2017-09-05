@@ -9,7 +9,10 @@ import java.util.Set;
 /**
  * @author Jeff Hsu
  */
-class CurrencyFormat {
+public final class CurrencyFormat {
+	
+	private CurrencyFormat() {
+	}
 	
 	/**
 	 * @param currencies
