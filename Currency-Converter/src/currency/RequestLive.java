@@ -18,8 +18,10 @@ import org.json.JSONObject;
 /**
  * @author Jeff Hsu
  */
-class RequestLive {
+public final class RequestLive {
 	
+	private RequestLive() {
+	}
 	
 	/**
 	 * @param targetCurrency

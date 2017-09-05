@@ -6,7 +6,10 @@ import org.json.JSONObject;
 /**
  * @author Jeff Hsu
  */
-public class ErrorCodeHandler {
+public final class ErrorCodeHandler {
+	
+	private ErrorCodeHandler() {
+	}
 	
 	public static void errorHandler(JSONObject rate){
 		int errorCode = rate.getJSONObject("error").getInt("code");
