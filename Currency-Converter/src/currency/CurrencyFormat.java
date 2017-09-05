@@ -10,10 +10,10 @@ import java.util.Set;
  * @author Jeff Hsu
  */
 public final class CurrencyFormat {
-	
+
 	private CurrencyFormat() {
 	}
-	
+
 	/**
 	 * @param currencies
 	 * @return string of currencies formatted for the API request
@@ -25,7 +25,7 @@ public final class CurrencyFormat {
 		}
 		return result.substring(0, result.length()-1);
 	}
-	
+
 	/**
 	 * @param currencies
 	 * @return array of currencies with duplicates removed
