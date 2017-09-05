@@ -1,6 +1,6 @@
 # Currency-Converter
 
-Convert currency based on exchange rates updated from currencylayer API every hour
+Convert currency based on exchange rates updated from currencylayer API every hour.
 You can register for a free account at [currencylayer.com](https://currencylayer.com/) for up to 1000 API requests per month. 
 
 Usage
