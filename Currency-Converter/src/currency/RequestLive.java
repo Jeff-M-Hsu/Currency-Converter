@@ -64,7 +64,7 @@ public final class RequestLive {
 				for(int i = 0; i < targetCurrency.length; i++) {
 					quotes[i] = source.concat(targetCurrency[i].toUpperCase());
 					double exchangeRate = rate.getJSONObject("quotes").getDouble(quotes[i]);
-					System.out.printf("%.2f" + " " + rate.getString("source") + " in " 
+					System.out.printf("%.2f" + " " + source + " in " 
 							+ targetCurrency[i] + " " + exchangeRate + " = "
 							+ "%.2f" + " (Date: " + formattedDate + ")",amount,amount*exchangeRate);
 					System.out.println("\n");
