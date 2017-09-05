@@ -6,6 +6,10 @@ import java.io.FileReader;
 import java.io.IOException;
 
 class Readfile {
+	
+	private Readfile() {
+	}
+	
 	public static String readfile(){
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader("key.txt"));

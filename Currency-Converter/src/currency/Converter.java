@@ -6,7 +6,9 @@ import java.util.Scanner;
  * @author Jeff Hsu
  */
 public class Converter {
-
+	
+	private Converter() {
+	}
 	// requests exchange rate from specific day in YYYY-MM-DD format
 	public static final String HIST = "historical";
 
@@ -36,9 +38,9 @@ public class Converter {
 
 		// call desired API request
 		System.out.println("\n");
-		if("live".equals(endpoint))
+		if("live".equals(endpoint)) {
 			RequestLive.requestLive(targetCurrencies, amount);
-
+		}
 		input.close();
 	}
 
