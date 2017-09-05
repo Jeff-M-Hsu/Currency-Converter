@@ -15,9 +15,17 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * @author Jeff Hsu
+ */
 class RequestLive {
 	
 	
+	/**
+	 * @param targetCurrency
+	 * @param amount
+	 * requests currency exchange, rates updated every hour
+	 */
 	public static void requestLive(String[] targetCurrency, double amount) {
 		
 		/** constants used to build URL */

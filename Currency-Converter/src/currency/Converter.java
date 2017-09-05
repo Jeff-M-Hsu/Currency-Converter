@@ -25,8 +25,8 @@ public class Converter {
 		System.out.println("Enter target currencies in their respective 3 letter forms,"
 							+ " separated by single spaces: ");
 		input.nextLine();
-		
 		String[] targetCurrencies = input.nextLine().toUpperCase().split(" ");
+		// removes duplicates
 		targetCurrencies = CurrencyFormat.unique(targetCurrencies);
 		
 		

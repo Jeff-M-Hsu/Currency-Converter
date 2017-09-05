@@ -6,7 +6,15 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @author Jeff Hsu
+ */
 class CurrencyFormat {
+	
+	/**
+	 * @param currencies
+	 * @return string of currencies formatted for the API request
+	 */
 	public static String combine(String[] currencies) {
 		String result = "";
 		for(int i = 0; i < currencies.length; i++) {
@@ -14,6 +22,11 @@ class CurrencyFormat {
 		}
 		return result.substring(0, result.length()-1);
 	}
+	
+	/**
+	 * @param currencies
+	 * @return array of currencies with duplicates removed
+	 */
 	public static String[] unique(String[] currencies) {
 		Set<String> temp = new HashSet<String>(Arrays.asList(currencies));
 		ArrayList<String> list = new ArrayList<String>(temp);

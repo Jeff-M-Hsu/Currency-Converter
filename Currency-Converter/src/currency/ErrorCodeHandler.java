@@ -3,6 +3,9 @@ package currency;
 import org.json.JSONObject;
 
 
+/**
+ * @author Jeff Hsu
+ */
 public class ErrorCodeHandler {
 	
 	public static void errorHandler(JSONObject rate){
