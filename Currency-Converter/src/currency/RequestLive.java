@@ -27,7 +27,7 @@ class RequestLive {
 		final String LIVE = "live";
 		
 		// builds request to API
-		HttpGet get = new HttpGet(URL + LIVE + "?access_key=" + API_KEY + "&currencies=");
+		HttpGet get = new HttpGet(URL + LIVE + "?access_key=" + API_KEY + "&currencies=" + CurrencyFormat.combine(targetCurrency));
 		
 		// makes requests to the API
 		CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -38,7 +38,10 @@ class RequestLive {
 				
 				// converts response to java object
 				JSONObject rate = new JSONObject(EntityUtils.toString(entity));
-				
+				if(rate.getBoolean("success") == false) {
+					ErrorCodeHandler.errorHandler(rate);
+				}
+				else {
 				// parsed objects accessed by date
 				Date timeStamp = new Date((long)(rate.getLong("timestamp")*1000));
 				String formattedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss a").format(timeStamp);
@@ -51,11 +54,13 @@ class RequestLive {
 				for(int i = 0; i < targetCurrency.length; i++) {
 					quotes[i] = source.concat(targetCurrency[i].toUpperCase());
 					double exchangeRate = rate.getJSONObject("quotes").getDouble(quotes[i]);
-					System.out.println(amount + " " + rate.getString("source") + " in " 
+					System.out.printf("%.2f" + " " + rate.getString("source") + " in " 
 									+ targetCurrency[i] + " " + exchangeRate + " = "
-									+ amount*exchangeRate + " (Date: " + formattedDate + ")");
+									+ "%.2f" + " (Date: " + formattedDate + ")",amount,amount*exchangeRate);
+					System.out.println("\n");
 				}
 				response.close();
+				}
 				
 			} catch (ClientProtocolException e) {
 				// TODO Auto-generated catch block
@@ -70,5 +75,6 @@ class RequestLive {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 	}
 }
