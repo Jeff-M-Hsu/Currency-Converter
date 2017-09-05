@@ -1,4 +1,4 @@
-# Currency-Converter [![Codacy Badge](https://api.codacy.com/project/badge/Grade/35caf00f0b044799b3953f72a18bedfa)](https://www.codacy.com/app/jeff_m_hsu/Currency-Converter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Jeff-M-Hsu/Currency-Converter&amp;utm_campaign=Badge_Grade)
+# Currency-Converter
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/87f13555eb034df1a0f6fa0ae0ed490c)](https://www.codacy.com/app/jeff_m_hsu/Currency-Converter?utm_source=github.com&utm_medium=referral&utm_content=Jeff-M-Hsu/Currency-Converter&utm_campaign=badger)
 
