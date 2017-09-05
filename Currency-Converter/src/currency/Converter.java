@@ -5,13 +5,14 @@ import java.util.Scanner;
 /**
  * @author Jeff Hsu
  */
-public class Converter {
+public final class Converter {
 	
 	private Converter() {
 	}
-	// requests exchange rate from specific day in YYYY-MM-DD format
-	public static final String HIST = "historical";
-
+	
+	/* requests exchange rate from specific day in YYYY-MM-DD format
+	 * public static final String HIST = "historical";
+	 */
 
 	public static void main(String[] args) {
 		/* user inputs amount to convert as well as
