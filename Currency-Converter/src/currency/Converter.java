@@ -36,7 +36,7 @@ public class Converter {
 		
 		// call desired API request
 		System.out.println("\n");
-		if(endpoint.equals("live"))
+		if("live".equals(endpoint))
 			RequestLive.requestLive(targetCurrencies, amount);
 		
 		input.close();

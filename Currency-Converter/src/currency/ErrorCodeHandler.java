@@ -11,7 +11,7 @@ public final class ErrorCodeHandler {
 	private ErrorCodeHandler() {
 	}
 	
-	public static void errorHandler(JSONObject rate){
+	public static void errorHandler(JSONObject rate) {
 		int errorCode = rate.getJSONObject("error").getInt("code");
 		switch(errorCode) {
 		
@@ -42,8 +42,10 @@ public final class ErrorCodeHandler {
 		case 302:  System.out.println("Invalid date");
 		break;
 		
+		default: System.out.println("Unknown error has occured");
+		break;
 		}
-		System.exit(1);
+
 	}
 
 	

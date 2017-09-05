@@ -48,7 +48,7 @@ public final class RequestLive {
 				
 				// converts response to java object
 				JSONObject rate = new JSONObject(EntityUtils.toString(entity));
-				if(rate.getBoolean("success") == false) {
+				if(!rate.getBoolean("success")) {
 					ErrorCodeHandler.errorHandler(rate);
 				}
 				else {
@@ -82,6 +82,9 @@ public final class RequestLive {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
