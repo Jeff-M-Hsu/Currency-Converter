@@ -11,6 +11,6 @@ Save the API Access Key from your account dashboard as a file named "key.txt" an
 
 To-Do List
 ----------
- - Implement method to request from the "historical" endpoint of the API
+ ~~- Implement method to request from the "historical" endpoint of the API~~
  - Clean up code wherever possible
  - Create a UI and executable when project functionality is complete

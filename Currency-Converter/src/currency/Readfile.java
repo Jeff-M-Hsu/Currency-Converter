@@ -19,7 +19,7 @@ public final class Readfile {
 		} catch(FileNotFoundException e) {
 			System.out.println("API key file not found");
 		} catch (IOException e) {
-			System.out.println("Could not read file");;
+			System.out.println("Could not read file");
 		}
 		return "";
 	}

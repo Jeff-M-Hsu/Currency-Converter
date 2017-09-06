@@ -3,7 +3,7 @@ package currency;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.time.*;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -25,9 +25,6 @@ public final class RequestHistory {
 
 	private RequestHistory() {
 	}
-
-	// requests exchange rate from specific day in YYYY-MM-DD format
-	public static final String HIST = "historical";
 
 	public static String verifyDate(String year, String month, String day) throws DateTimeParseException{
 		try {
