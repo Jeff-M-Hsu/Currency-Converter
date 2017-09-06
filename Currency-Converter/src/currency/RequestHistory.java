@@ -3,6 +3,9 @@ package currency;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
@@ -18,27 +21,42 @@ import org.json.JSONObject;
 /**
  * @author Jeff Hsu
  */
-public final class RequestLive {
+public final class RequestHistory {
 
-	private RequestLive() {
+	private RequestHistory() {
+	}
+
+	// requests exchange rate from specific day in YYYY-MM-DD format
+	public static final String HIST = "historical";
+
+	public static String verifyDate(String year, String month, String day) throws DateTimeParseException{
+		try {
+			String formattedDate = year + "-" + month + "-" + day;
+			LocalDate date = LocalDate.parse(formattedDate);
+			if(date.isBefore(LocalDate.now()) && date.isAfter(LocalDate.now().minusYears(16))) {
+				return date.format(DateTimeFormatter.ISO_LOCAL_DATE);
+			}
+		}
+		catch(DateTimeParseException e) {
+			System.out.println("Invalid date");
+		}
+		return "";
 	}
 
 	/**
 	 * @param targetCurrency
 	 * @param amount
-	 * requests currency exchange, rates updated every hour
 	 */
-	public static void requestLive(String[] targetCurrency, double amount) {
+	public static void requestHistory(String[] targetCurrency, double amount, String date) {
 
 		/** constants used to build URL */
 		final String API_KEY = Readfile.readfile();
 		final String URL = "http://apilayer.net/api/";
-		// requests hourly updated exchange rate
-		final String LIVE = "live";
+		final String HIST = "historical";
 
 		// builds request to API
-		HttpGet get = new HttpGet(URL + LIVE + "?access_key=" + API_KEY + "&currencies=" 
-				+ CurrencyFormat.combine(targetCurrency));
+		HttpGet get = new HttpGet(URL + HIST + "?access_key=" + API_KEY + "&currencies=" 
+				+ CurrencyFormat.combine(targetCurrency) + "&date=" + date);
 
 		// makes requests to the API
 		CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -55,7 +73,7 @@ public final class RequestLive {
 			else {
 				// parsed objects accessed by date
 				Date timeStamp = new Date((long)(rate.getLong("timestamp")*1000));
-				String formattedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss a").format(timeStamp);
+				String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(timeStamp);
 				String source = rate.getString("source");
 
 				// forms target currency quotes for parsing JSONObject
@@ -82,6 +100,5 @@ public final class RequestLive {
 		} catch (IOException e) {
 			System.out.println("An error occured with the API response, please try again.");
 		}
-
 	}
 }

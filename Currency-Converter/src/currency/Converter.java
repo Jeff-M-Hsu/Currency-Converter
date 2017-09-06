@@ -6,15 +6,12 @@ import java.util.Scanner;
  * @author Jeff Hsu
  */
 public final class Converter {
-	
+
 	private Converter() {
 	}
-	
-	/* requests exchange rate from specific day in YYYY-MM-DD format
-	 * public static final String HIST = "historical";
-	 */
 
 	public static void main(String[] args) {
+		
 		/* user inputs amount to convert as well as
 		 * which currencies to convert to
 		 */
@@ -38,10 +35,23 @@ public final class Converter {
 		double amount = input.nextDouble();
 
 		// call desired API request
-		System.out.println("\n");
 		if("live".equals(endpoint)) {
 			RequestLive.requestLive(targetCurrencies, amount);
 		}
+		else if("historical".equals(endpoint)) {
+			System.out.println("Enter date in yyyy-mm-dd format, " 
+					+ "separating each with single spaces: ");
+			// pads with a leading 0 in event of single digit
+			String year = String.valueOf(input.nextInt());
+			String month = String.format("%02d", input.nextInt());
+			String day = String.format("%02d", input.nextInt());
+			String date = RequestHistory.verifyDate(year, month, day);
+			// checks if date is valid without having to ask API, saves a request
+			if(!date.isEmpty()) {
+				RequestHistory.requestHistory(targetCurrencies, amount, date);
+			}
+		}
+
 		input.close();
 	}
 
