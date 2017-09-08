@@ -41,8 +41,8 @@ public final class Converter {
 		else if("historical".equals(endpoint)) {
 			System.out.println("Enter date in yyyy-mm-dd format, " 
 					+ "separating each with single spaces: ");
-			// pads with a leading 0 in event of single digit
 			String year = String.valueOf(input.nextInt());
+			// pads with a leading 0 in event of single digit
 			String month = String.format("%02d", input.nextInt());
 			String day = String.format("%02d", input.nextInt());
 			String date = RequestHistory.verifyDate(year, month, day);
