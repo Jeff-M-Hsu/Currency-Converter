@@ -12,6 +12,7 @@ public final class ErrorCodeHandler {
 	}
 
 	public static void errorHandler(JSONObject rate) {
+		
 		int errorCode = rate.getJSONObject("error").getInt("code");
 		switch(errorCode) {
 
