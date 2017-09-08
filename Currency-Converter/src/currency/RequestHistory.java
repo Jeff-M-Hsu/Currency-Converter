@@ -1,8 +1,6 @@
 package currency;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -26,6 +24,13 @@ public final class RequestHistory {
 	private RequestHistory() {
 	}
 
+	/**
+	 * @param year
+	 * @param month
+	 * @param day
+	 * @return String containing properly formatted date
+	 * @throws DateTimeParseException if date is outside range from today to 16 years before today
+	 */
 	public static String verifyDate(String year, String month, String day) throws DateTimeParseException{
 		try {
 			String formattedDate = year + "-" + month + "-" + day;
@@ -68,23 +73,7 @@ public final class RequestHistory {
 				ErrorCodeHandler.errorHandler(rate);
 			}
 			else {
-				// parsed objects accessed by date
-				Date timeStamp = new Date((long)(rate.getLong("timestamp")*1000));
-				String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(timeStamp);
-				String source = rate.getString("source");
-
-				// forms target currency quotes for parsing JSONObject
-				String[] quotes = new String[targetCurrency.length];
-
-				// prints conversion with timestamps
-				for(int i = 0; i < targetCurrency.length; i++) {
-					quotes[i] = source.concat(targetCurrency[i].toUpperCase());
-					double exchangeRate = rate.getJSONObject("quotes").getDouble(quotes[i]);
-					System.out.printf("%.2f" + " " + source + " in " 
-							+ targetCurrency[i] + " " + exchangeRate + " = "
-							+ "%.2f" + " (Date: " + formattedDate + ")",amount,amount*exchangeRate);
-					System.out.println("\n");
-				}
+				RequestOutput.print(rate, targetCurrency, amount);
 				response.close();
 			}
 
