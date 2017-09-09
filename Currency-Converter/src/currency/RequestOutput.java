@@ -34,7 +34,7 @@ public final class RequestOutput {
 			quotes[i] = source.concat(targetCurrency[i].toUpperCase());
 			double exchangeRate = rate.getJSONObject("quotes").getDouble(quotes[i]);
 			System.out.printf("%.2f" + " " + source + " in " 
-					+ targetCurrency[i] + " " + exchangeRate + " = "
+					+ targetCurrency[i] + " (1:" + exchangeRate + ") = "
 					+ "%.2f" + " (Date: " + formattedDate + ")",amount,amount*exchangeRate);
 			System.out.println("\n");
 		}
