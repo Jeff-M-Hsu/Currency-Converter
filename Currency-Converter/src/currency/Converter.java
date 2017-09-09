@@ -20,7 +20,11 @@ public final class Converter {
 		// conversion mode
 		System.out.println("Select mode [live/historical]: ");
 		String endpoint = input.next();
-
+		if(!"historical".equals(endpoint) && !"live".equals(endpoint)){
+			System.out.println("Invalid Mode");
+		}
+		
+		else {
 		// populate string array with target currencies
 		System.out.println("Enter target currencies in their respective 3 letter forms,"
 				+ " separated by single spaces: ");
@@ -53,6 +57,7 @@ public final class Converter {
 		}
 
 		input.close();
+		}
 	}
 
 }
