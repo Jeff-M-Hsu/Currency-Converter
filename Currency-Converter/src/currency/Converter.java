@@ -54,7 +54,9 @@ public final class Converter {
 				if(!date.isEmpty()) {
 					RequestHistory.requestHistory(targetCurrencies, amount, date);
 				}
-				else System.out.println("Invalid date");
+				else {
+					System.out.println("Invalid date");
+				}
 			}
 
 			input.close();
