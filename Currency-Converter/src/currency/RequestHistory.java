@@ -1,10 +1,10 @@
 package currency;
 
+import org.apache.http.client.methods.HttpGet;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
-import org.apache.http.client.methods.HttpGet;
 
 /**
  * @author Jeff Hsu
@@ -44,10 +44,14 @@ public final class RequestHistory {
 		final String URL = "http://apilayer.net/api/";
 		final String HIST = "historical";
 
-		// builds request to API
-		HttpGet get = new HttpGet(URL + HIST + "?access_key=" + API_KEY + "&currencies=" 
-				+ CurrencyFormat.combine(targetCurrency) + "&date=" + date);
+		if(API_KEY.isEmpty()){
+		}
+		else {
+			// builds request to API
+			HttpGet get = new HttpGet(URL + HIST + "?access_key=" + API_KEY + "&currencies="
+					+ CurrencyFormat.combine(targetCurrency) + "&date=" + date);
 
-		RequestOutput.request(get, targetCurrency, amount);
+			RequestOutput.request(get, targetCurrency, amount);
+		}
 	}
 }
