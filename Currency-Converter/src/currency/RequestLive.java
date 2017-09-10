@@ -23,10 +23,14 @@ public final class RequestLive {
 		// requests hourly updated exchange rate
 		final String LIVE = "live";
 
-		// builds request to API
-		HttpGet get = new HttpGet(URL + LIVE + "?access_key=" + API_KEY + "&currencies=" 
-				+ CurrencyFormat.combine(targetCurrency));
+		if(API_KEY.isEmpty()){
+		}
+		else {
+			// builds request to API
+			HttpGet get = new HttpGet(URL + LIVE + "?access_key=" + API_KEY + "&currencies="
+					+ CurrencyFormat.combine(targetCurrency));
 
-		RequestOutput.request(get, targetCurrency, amount);
+			RequestOutput.request(get, targetCurrency, amount);
+		}
 	}
 }
