@@ -37,8 +37,6 @@ import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
-import javax.swing.JLabel;
-import java.awt.SystemColor;
 
 public class ConverterAppWindow {
 
@@ -200,14 +198,14 @@ public class ConverterAppWindow {
 			}
 		});
 
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Live");
+		final JRadioButton rdbtnNewRadioButton = new JRadioButton("Live");
 		GridBagConstraints gbc_rdbtnNewRadioButton = new GridBagConstraints();
 		gbc_rdbtnNewRadioButton.insets = new Insets(0, 0, 5, 5);
 		gbc_rdbtnNewRadioButton.gridx = 7;
 		gbc_rdbtnNewRadioButton.gridy = 5;
 		frmCurrencyConverter.getContentPane().add(rdbtnNewRadioButton, gbc_rdbtnNewRadioButton);
 
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Historical");
+		final JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Historical");
 		GridBagConstraints gbc_rdbtnNewRadioButton_1 = new GridBagConstraints();
 		gbc_rdbtnNewRadioButton_1.insets = new Insets(0, 0, 5, 5);
 		gbc_rdbtnNewRadioButton_1.gridx = 7;
@@ -246,7 +244,7 @@ public class ConverterAppWindow {
 			}
 		});
 
-		JComboBox<String> comboBox = new JComboBox<String>();
+		final JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				target[0] = comboBox.getSelectedItem().toString();
