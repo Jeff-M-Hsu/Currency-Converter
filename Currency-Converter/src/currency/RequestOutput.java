@@ -81,7 +81,6 @@ public final class RequestOutput {
 			System.out.println("1 --> " + exchangeRate + "\n" + "Date: " + formattedDate + "\n");
 
 		}
-;
 	}
 
 	

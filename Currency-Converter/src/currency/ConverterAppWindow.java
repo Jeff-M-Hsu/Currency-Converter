@@ -45,9 +45,7 @@ public class ConverterAppWindow {
 	private double amount;
 	private String[] target = new String[1];
 	private String mode;
-	private String date;
 	private JTextField txtYyyymmdd;
-	private JTextField txtIconCreditsTo;
 
 	/**
 	 * Launch the application.
@@ -76,7 +74,7 @@ public class ConverterAppWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
+
 		frmCurrencyConverter = new JFrame();
 		frmCurrencyConverter.getContentPane().setFont(new Font("SansSerif", Font.PLAIN, 20));
 		frmCurrencyConverter.setResizable(false);
@@ -184,7 +182,7 @@ public class ConverterAppWindow {
 				try {
 					try {
 						OutputWindow dialog = new OutputWindow();
-						date = txtYyyymmdd.getText();
+						String date = txtYyyymmdd.getText();
 						dialog.setFields(amount, target, mode, date);
 						dialog.request();
 						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -251,7 +249,7 @@ public class ConverterAppWindow {
 			}
 		});
 
-		txtYyyymmdd = new JTextField();
+		JTextField txtYyyymmdd = new JTextField();
 		txtYyyymmdd.setHorizontalAlignment(SwingConstants.CENTER);
 		txtYyyymmdd.setEnabled(false);
 		txtYyyymmdd.setText("yyyy-mm-dd");
@@ -304,8 +302,8 @@ public class ConverterAppWindow {
 		gbc_horizontalStrut_2.gridx = 5;
 		gbc_horizontalStrut_2.gridy = 11;
 		frmCurrencyConverter.getContentPane().add(horizontalStrut_2, gbc_horizontalStrut_2);
-		
-		txtIconCreditsTo = new JTextField();
+
+		JTextField txtIconCreditsTo = new JTextField();
 		txtIconCreditsTo.setBackground(new Color(214, 217, 223));
 		txtIconCreditsTo.setFont(new Font("SansSerif", Font.PLAIN, 10));
 		txtIconCreditsTo.setText("icon credits to https://icons8.com/icon/36948/Initiate-Money-Transfer");

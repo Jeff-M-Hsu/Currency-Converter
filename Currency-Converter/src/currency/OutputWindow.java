@@ -17,6 +17,7 @@ import java.awt.Toolkit;
 
 @SuppressWarnings("serial")
 public class OutputWindow extends JDialog {
+
 	private double amount;
 	private String[] target;
 	private String mode;
