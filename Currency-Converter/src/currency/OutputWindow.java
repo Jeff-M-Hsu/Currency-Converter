@@ -20,27 +20,38 @@ public class OutputWindow extends JDialog {
 	private double amount;
 	private String[] target;
 	private String mode;
+	private String date;
 	public String output;
 
-	public void setFields(double amount, String[] target, String mode) {
+	public void setFields(double amount, String[] target, String mode, String date) {
 		this.amount = amount;
 		this.target = target;
 		this.mode = mode;
+		this.date = date;
 	}
 
 	public void request() {
-		if("live".equalsIgnoreCase(mode)) {
+		try {
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			PrintStream sysout = new PrintStream(out);
 			PrintStream old = new PrintStream(System.out);
 			System.setOut(sysout);
-			RequestLive.requestLive(target,amount);
-			output = out.toString();
-			System.out.flush();
-			System.setOut(System.out);
-			System.out.println(old);
-			String[] formatOut = output.split("\\n");
+			if("live".equalsIgnoreCase(mode)) {
+				RequestLive.requestLive(target,amount);
+				output = out.toString();
+				System.out.flush();
+				System.setOut(System.out);
+				System.out.println(old);
+			}
+			if("historical".equalsIgnoreCase(mode)) {
+				RequestHistory.requestHistory(target,amount,date);
+				output = out.toString();
+				System.out.flush();
+				System.setOut(System.out);
+				System.out.println(old);
+			}
 
+			String[] formatOut = output.split("\\n");
 			JLabel lblNewLabel = new JLabel(formatOut[2]);
 			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 			gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
@@ -61,6 +72,14 @@ public class OutputWindow extends JDialog {
 			gbc_lblNewLabel_2.gridx = 0;
 			gbc_lblNewLabel_2.gridy = 5;
 			getContentPane().add(lblNewLabel_2, gbc_lblNewLabel_2);
+
+		} catch(Exception e) {
+			JLabel errorLabel = new JLabel("Please enter valid information in the specified format");
+			GridBagConstraints gbc_errorLabel = new GridBagConstraints();
+			gbc_errorLabel.insets = new Insets(0, 0, 5, 0);
+			gbc_errorLabel.gridx = 0;
+			gbc_errorLabel.gridy = 4;
+			getContentPane().add(errorLabel, gbc_errorLabel);
 		}
 	}
 

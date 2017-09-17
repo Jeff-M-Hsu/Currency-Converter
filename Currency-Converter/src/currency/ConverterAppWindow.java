@@ -37,6 +37,8 @@ import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import javax.swing.JLabel;
+import java.awt.SystemColor;
 
 public class ConverterAppWindow {
 
@@ -45,6 +47,9 @@ public class ConverterAppWindow {
 	private double amount;
 	private String[] target = new String[1];
 	private String mode;
+	private String date;
+	private JTextField txtYyyymmdd;
+	private JTextField txtIconCreditsTo;
 
 	/**
 	 * Launch the application.
@@ -68,12 +73,12 @@ public class ConverterAppWindow {
 	public ConverterAppWindow() {
 		initialize();
 	}
-	
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		//icon credits to https://icons8.com/icon/36948/Initiate-Money-Transfer
+		
 		frmCurrencyConverter = new JFrame();
 		frmCurrencyConverter.getContentPane().setFont(new Font("SansSerif", Font.PLAIN, 20));
 		frmCurrencyConverter.setResizable(false);
@@ -84,16 +89,13 @@ public class ConverterAppWindow {
 		frmCurrencyConverter.setTitle("Currency Converter");
 		frmCurrencyConverter.setBounds(100, 100, 317, 256);
 		frmCurrencyConverter.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		frmCurrencyConverter.setJMenuBar(menuBar);
-		
+
 		JMenu mnNewMenu = new JMenu("File");
 		menuBar.add(mnNewMenu);
-		
-		JMenuItem mntmAbout = new JMenuItem("About");
-		mnNewMenu.add(mntmAbout);
-		
+
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mnNewMenu.add(mntmExit);
 		mntmExit.addMouseListener(new MouseAdapter() {
@@ -105,39 +107,39 @@ public class ConverterAppWindow {
 		});
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 268, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 1, 0, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 1, 0, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		frmCurrencyConverter.getContentPane().setLayout(gridBagLayout);
-		
+
 		Component verticalStrut_1 = Box.createVerticalStrut(20);
 		GridBagConstraints gbc_verticalStrut_1 = new GridBagConstraints();
 		gbc_verticalStrut_1.insets = new Insets(0, 0, 5, 5);
 		gbc_verticalStrut_1.gridx = 6;
 		gbc_verticalStrut_1.gridy = 0;
 		frmCurrencyConverter.getContentPane().add(verticalStrut_1, gbc_verticalStrut_1);
-		
+
 		Component verticalStrut = Box.createVerticalStrut(20);
 		GridBagConstraints gbc_verticalStrut = new GridBagConstraints();
 		gbc_verticalStrut.insets = new Insets(0, 0, 5, 5);
 		gbc_verticalStrut.gridx = 10;
 		gbc_verticalStrut.gridy = 0;
 		frmCurrencyConverter.getContentPane().add(verticalStrut, gbc_verticalStrut);
-		
+
 		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
 		GridBagConstraints gbc_horizontalStrut_1 = new GridBagConstraints();
 		gbc_horizontalStrut_1.insets = new Insets(0, 0, 5, 5);
 		gbc_horizontalStrut_1.gridx = 9;
 		gbc_horizontalStrut_1.gridy = 2;
 		frmCurrencyConverter.getContentPane().add(horizontalStrut_1, gbc_horizontalStrut_1);
-		
+
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		GridBagConstraints gbc_horizontalStrut = new GridBagConstraints();
 		gbc_horizontalStrut.insets = new Insets(0, 0, 5, 5);
 		gbc_horizontalStrut.gridx = 4;
 		gbc_horizontalStrut.gridy = 3;
 		frmCurrencyConverter.getContentPane().add(horizontalStrut, gbc_horizontalStrut);
-		
+
 		txtEnterAmount = new JTextField();
 		txtEnterAmount.setHorizontalAlignment(SwingConstants.CENTER);
 		txtEnterAmount.setSelectedTextColor(new Color(255, 255, 255));
@@ -175,15 +177,17 @@ public class ConverterAppWindow {
 				}
 			}
 		});
-		
+
 		JButton btnNewButton = new JButton("Convert!");
+		btnNewButton.setEnabled(true);
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				try {
 					try {
 						OutputWindow dialog = new OutputWindow();
-						dialog.setFields(amount, target, mode);
+						date = txtYyyymmdd.getText();
+						dialog.setFields(amount, target, mode, date);
 						dialog.request();
 						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 						dialog.setVisible(true);
@@ -195,30 +199,32 @@ public class ConverterAppWindow {
 				}
 			}
 		});
-		
+
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("Live");
-
-
 		GridBagConstraints gbc_rdbtnNewRadioButton = new GridBagConstraints();
 		gbc_rdbtnNewRadioButton.insets = new Insets(0, 0, 5, 5);
 		gbc_rdbtnNewRadioButton.gridx = 7;
 		gbc_rdbtnNewRadioButton.gridy = 5;
 		frmCurrencyConverter.getContentPane().add(rdbtnNewRadioButton, gbc_rdbtnNewRadioButton);
-		
+
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Historical");
 		GridBagConstraints gbc_rdbtnNewRadioButton_1 = new GridBagConstraints();
 		gbc_rdbtnNewRadioButton_1.insets = new Insets(0, 0, 5, 5);
 		gbc_rdbtnNewRadioButton_1.gridx = 7;
 		gbc_rdbtnNewRadioButton_1.gridy = 6;
 		frmCurrencyConverter.getContentPane().add(rdbtnNewRadioButton_1, gbc_rdbtnNewRadioButton_1);
+
 		ButtonGroup rdbt = new ButtonGroup();
 		rdbt.add(rdbtnNewRadioButton);
 		rdbt.add(rdbtnNewRadioButton_1);
+
 		rdbtnNewRadioButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if(rdbtnNewRadioButton.isSelected()) {
 					mode = rdbtnNewRadioButton.getText();
+					txtYyyymmdd.setEnabled(false);
+					txtYyyymmdd.setText("yyyy-mm-dd");
 				}
 			}
 		});
@@ -227,21 +233,43 @@ public class ConverterAppWindow {
 			public void mouseClicked(MouseEvent arg0) {
 				if(rdbtnNewRadioButton_1.isSelected()) {
 					mode = rdbtnNewRadioButton_1.getText();
+					txtYyyymmdd.setEnabled(true);
+					txtYyyymmdd.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mousePressed(MouseEvent arg0) {
+							if("yyyy-mm-dd".equalsIgnoreCase(txtYyyymmdd.getText())) {
+								txtYyyymmdd.setText("");
+							}
+						}
+					});
 				}
 			}
 		});
-		
+
 		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				target[0] = comboBox.getSelectedItem().toString();
 			}
 		});
+
+		txtYyyymmdd = new JTextField();
+		txtYyyymmdd.setHorizontalAlignment(SwingConstants.CENTER);
+		txtYyyymmdd.setEnabled(false);
+		txtYyyymmdd.setText("yyyy-mm-dd");
+		txtYyyymmdd.setToolTipText("yyyy-mm-dd");
+		GridBagConstraints gbc_txtYyyymmdd = new GridBagConstraints();
+		gbc_txtYyyymmdd.insets = new Insets(0, 0, 5, 5);
+		gbc_txtYyyymmdd.gridx = 7;
+		gbc_txtYyyymmdd.gridy = 7;
+		frmCurrencyConverter.getContentPane().add(txtYyyymmdd, gbc_txtYyyymmdd);
+		txtYyyymmdd.setColumns(10);
+
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		comboBox.setEditable(false);
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.gridx = 7;
-		gbc_comboBox.gridy = 7;
+		gbc_comboBox.gridy = 8;
 		frmCurrencyConverter.getContentPane().add(comboBox, gbc_comboBox);
 		File input = new File("abbreviations.txt");
 		BufferedReader list;
@@ -252,32 +280,46 @@ public class ConverterAppWindow {
 				comboBox.addItem(addItem);
 			}
 			list.close();
-			
+
 		} catch (FileNotFoundException e) {
 			System.out.println("can't find file");
 		} catch (IOException e) {
 			System.out.println("can't read file");
 		}
 
-		
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton.gridx = 7;
-		gbc_btnNewButton.gridy = 8;
+		gbc_btnNewButton.gridy = 9;
 		frmCurrencyConverter.getContentPane().add(btnNewButton, gbc_btnNewButton);
-		
+
 		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
 		GridBagConstraints gbc_horizontalStrut_3 = new GridBagConstraints();
 		gbc_horizontalStrut_3.insets = new Insets(0, 0, 5, 5);
 		gbc_horizontalStrut_3.gridx = 8;
-		gbc_horizontalStrut_3.gridy = 9;
+		gbc_horizontalStrut_3.gridy = 10;
 		frmCurrencyConverter.getContentPane().add(horizontalStrut_3, gbc_horizontalStrut_3);
-		
+
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
 		GridBagConstraints gbc_horizontalStrut_2 = new GridBagConstraints();
 		gbc_horizontalStrut_2.insets = new Insets(0, 0, 5, 5);
 		gbc_horizontalStrut_2.gridx = 5;
-		gbc_horizontalStrut_2.gridy = 10;
+		gbc_horizontalStrut_2.gridy = 11;
 		frmCurrencyConverter.getContentPane().add(horizontalStrut_2, gbc_horizontalStrut_2);
+		
+		txtIconCreditsTo = new JTextField();
+		txtIconCreditsTo.setBackground(new Color(214, 217, 223));
+		txtIconCreditsTo.setFont(new Font("SansSerif", Font.PLAIN, 10));
+		txtIconCreditsTo.setText("icon credits to https://icons8.com/icon/36948/Initiate-Money-Transfer");
+		txtIconCreditsTo.setHorizontalAlignment(SwingConstants.CENTER);
+		txtIconCreditsTo.setEditable(false);
+		GridBagConstraints gbc_txtIconCreditsTo = new GridBagConstraints();
+		gbc_txtIconCreditsTo.gridwidth = 15;
+		gbc_txtIconCreditsTo.insets = new Insets(0, 0, 0, 5);
+		gbc_txtIconCreditsTo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtIconCreditsTo.gridx = 0;
+		gbc_txtIconCreditsTo.gridy = 12;
+		frmCurrencyConverter.getContentPane().add(txtIconCreditsTo, gbc_txtIconCreditsTo);
+		txtIconCreditsTo.setColumns(10);
 	}
 }
