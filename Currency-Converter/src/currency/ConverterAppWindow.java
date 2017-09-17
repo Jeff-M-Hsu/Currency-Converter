@@ -46,6 +46,7 @@ public class ConverterAppWindow {
 	private String[] target = new String[1];
 	private String mode;
 	private JTextField txtYyyymmdd;
+	private String date;
 
 	/**
 	 * Launch the application.
@@ -182,7 +183,7 @@ public class ConverterAppWindow {
 				try {
 					try {
 						OutputWindow dialog = new OutputWindow();
-						String date = txtYyyymmdd.getText();
+						txtYyyymmdd.getText();
 						dialog.setFields(amount, target, mode, date);
 						dialog.request();
 						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -249,7 +250,7 @@ public class ConverterAppWindow {
 			}
 		});
 
-		JTextField txtYyyymmdd = new JTextField();
+		txtYyyymmdd = new JTextField();
 		txtYyyymmdd.setHorizontalAlignment(SwingConstants.CENTER);
 		txtYyyymmdd.setEnabled(false);
 		txtYyyymmdd.setText("yyyy-mm-dd");
