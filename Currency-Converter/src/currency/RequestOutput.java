@@ -19,7 +19,7 @@ import java.util.Date;
  * @author Jeff Hsu
  */
 public final class RequestOutput {
-
+	
 	private RequestOutput() {
 	}
 
@@ -77,10 +77,13 @@ public final class RequestOutput {
 			quotes[i] = source.concat(targetCurrency[i].toUpperCase());
 			double exchangeRate = rate.getJSONObject("quotes").getDouble(quotes[i]);
 			System.out.printf("%.2f" + " " + source + " in " 
-					+ targetCurrency[i] + " (1 -> " + exchangeRate + ") = "
-					+ "%.2f" + " (Date: " + formattedDate + ")",amount,amount*exchangeRate);
-			System.out.println("\n");
+					+ targetCurrency[i] + " = " + "%.2f\n",amount,amount*exchangeRate);
+			System.out.println("1 --> " + exchangeRate + "\n" + "Date: " + formattedDate + "\n");
+
 		}
+;
 	}
+
+	
 
 }

@@ -36,4 +36,5 @@ public final class CurrencyFormat {
 		Collections.reverse(list);
 		return list.toArray(new String[list.size()]);
 	}
+
 }
