@@ -16,5 +16,6 @@ To-Do List
  ~~- Implement method to request from the "historical" endpoint of the API~~
  
  ~~- Clean up code wherever possible~~
+ 
  ~- Create a UI and executable when project functionality is complete~
  - Documentation, testing, refactoring
