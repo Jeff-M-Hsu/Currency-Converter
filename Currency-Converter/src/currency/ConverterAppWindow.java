@@ -129,18 +129,12 @@ public class ConverterAppWindow {
 				if(!txtEnterAmount.getText().matches("([1-9]+\\.?\\d*)")) {
 					txtEnterAmount.setText("");
 				}
-				else {
-					amount = Double.parseDouble(txtEnterAmount.getText());
-				}
 			}
 		});
 		txtEnterAmount.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent arg0) {
 				if(!txtEnterAmount.getText().matches("([1-9]+\\.?\\d*)")) {
 					txtEnterAmount.setText("");
-				}
-				else {
-					amount = Double.parseDouble(txtEnterAmount.getText());
 				}
 			}
 		});
@@ -152,6 +146,7 @@ public class ConverterAppWindow {
 			public void mousePressed(MouseEvent e) {
 				try {
 					try {
+						amount = Double.parseDouble(txtEnterAmount.getText());
 						OutputWindow dialog = new OutputWindow();
 						txtYyyymmdd.getText();
 						dialog.setFields(amount, target, mode, date);
